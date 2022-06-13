@@ -33,7 +33,7 @@ async def parser_main_menu():
                     description = pars_vac(link)
                     time_pub = task.find("span", class_="params__published-at icon_task_publish_at").text 
                     vac.append(link[7:])
-                    await bot.send_vacancies(f"{name_task}\n{price}\n\n{description}\nTags: {tag}\n\nTime: {time_pub}\n\nLink: https://freelance.habr.com{link}")
+                    await bot.send_vacancies(name_task, price, description, tag, time_pub, link)
         if len(vac) >= 150:
             del vac[0:5]
         time.sleep(20)

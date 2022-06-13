@@ -17,8 +17,8 @@ async def message_start(message: types.Message):
         await bot.send_message(my, "Собираю данные с сайта freelance habr")
         await parser_main_menu()
 
-async def send_vacancies(text):
+async def send_vacancies(name_task, price, description, tag, time_pub, link):
     try:
-        await bot.send_message(my, text)
+        await bot.send_message(my, f"{name_task}\n{price}\n\n{description}\nTags: {tag}\n\nTime: {time_pub}\n\nLink: https://freelance.habr.com{link}")
     except aiogram.utils.exceptions.MessageIsTooLong as err:
-        await bot.send_message(my, "слишком длинное сообщение")
+        await bot.send_message(my, f"{name_task}\n{price}\n\nERROR: текст слишком длинный\nTags: {tag}\n\nTime: {time_pub}\n\nLink: https://freelance.habr.com{link}")
