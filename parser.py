@@ -44,5 +44,9 @@ def pars_vac(link):
     url = 'https://freelance.habr.com'+link
     rest_task = requests.get(url)
     soup = bs(rest_task.text, "lxml")
-    task_description = soup.find("div", class_="task__description").text
-    return task_description
+    try:
+        task_description = soup.find("div", class_="task__description").text
+    except Exception:
+        task_description = 'error'
+    finally:
+        return task_description
