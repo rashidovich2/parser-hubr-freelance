@@ -27,21 +27,19 @@ async def parser_main_menu():
                     except Exception as err:
                         price = "договорная"
                     tags = task.find_all("a", class_="tags__item_link")
-                    tag = []
-                    for t in tags:
-                        tag.append(t.text)
+                    tag = [t.text for t in tags]
                     description = pars_vac(link)
-                    time_pub = task.find("span", class_="params__published-at icon_task_publish_at").text 
+                    time_pub = task.find("span", class_="params__published-at icon_task_publish_at").text
                     vac.append(link[7:])
                     await bot.send_vacancies(name_task, price, description, tag, time_pub, link)
         if len(vac) >= 150:
-            del vac[0:5]
+            del vac[:5]
         time.sleep(20)
         
 
 
 def pars_vac(link):
-    url = 'https://freelance.habr.com'+link
+    url = f'https://freelance.habr.com{link}'
     rest_task = requests.get(url)
     soup = bs(rest_task.text, "lxml")
     try:
